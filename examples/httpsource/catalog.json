@@ -1,0 +1,78 @@
+{
+  "streams": [
+    {
+      "stream": {
+        "name": "users",
+        "namespace": "dummyjson",
+        "json_schema": {
+          "properties": {
+            "id": {
+              "type": ["integer"],
+              "description": "User ID"
+            },
+            "firstName": {
+              "type": ["string"],
+              "description": "First name"
+            },
+            "lastName": {
+              "type": ["string"],
+              "description": "Last name"
+            },
+            "email": {
+              "type": ["string"],
+              "description": "Email address"
+            },
+            "phone": {
+              "type": ["string"],
+              "description": "Phone number"
+            },
+            "age": {
+              "type": ["integer"],
+              "description": "Age"
+            }
+          }
+        },
+        "supported_sync_modes": ["full_refresh"]
+      },
+      "sync_mode": "full_refresh",
+      "destination_sync_mode": "overwrite"
+    },
+    {
+      "stream": {
+        "name": "products",
+        "namespace": "dummyjson",
+        "json_schema": {
+          "properties": {
+            "id": {
+              "type": ["integer"],
+              "description": "Product ID"
+            },
+            "title": {
+              "type": ["string"],
+              "description": "Product title"
+            },
+            "description": {
+              "type": ["string"],
+              "description": "Product description"
+            },
+            "price": {
+              "type": ["number"],
+              "description": "Product price"
+            },
+            "category": {
+              "type": ["string"],
+              "description": "Product category"
+            },
+            "brand": {
+              "type": ["string"],
+              "description": "Product brand"
+            }
+          }
+        },
+        "supported_sync_modes": ["full_refresh"]
+      },
+      "sync_mode": "full_refresh",
+      "destination_sync_mode": "overwrite"
+    }
+  ]
+}
