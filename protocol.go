@@ -162,22 +162,28 @@ const (
 	StateTypeLegacy StateType = "LEGACY"
 )
 
-// streamDescriptor identifies a specific stream by name and optional namespace
-type streamDescriptor struct {
+// StreamDescriptor identifies a specific stream by name and optional namespace
+type StreamDescriptor struct {
 	Name      string  `json:"name"`
 	Namespace *string `json:"namespace,omitempty"`
 }
 
-// streamState represents state for a single stream
-type streamState struct {
-	StreamDescriptor streamDescriptor       `json:"stream_descriptor"`
+// streamDescriptor is an alias kept for internal JSON compatibility.
+type streamDescriptor = StreamDescriptor
+
+// StreamState represents state for a single stream
+type StreamState struct {
+	StreamDescriptor StreamDescriptor       `json:"stream_descriptor"`
 	StreamState      map[string]interface{} `json:"stream_state,omitempty"`
 }
+
+// streamState is an alias kept for internal JSON compatibility.
+type streamState = StreamState
 
 // globalState represents state shared across multiple streams
 type globalState struct {
 	SharedState  map[string]interface{} `json:"shared_state,omitempty"`
-	StreamStates []streamState          `json:"stream_states"`
+	StreamStates []StreamState          `json:"stream_states"`
 }
 
 // state is used to store data between syncs - useful for incremental syncs and state storage
