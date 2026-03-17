@@ -173,8 +173,8 @@ type streamDescriptor = StreamDescriptor
 
 // StreamState represents state for a single stream
 type StreamState struct {
-	StreamDescriptor StreamDescriptor       `json:"streamDescriptor"`
-	StreamState      map[string]interface{} `json:"streamState,omitempty"`
+	StreamDescriptor StreamDescriptor       `json:"stream_descriptor"`
+	StreamState      map[string]interface{} `json:"stream_state,omitempty"`
 }
 
 // streamState is an alias kept for internal JSON compatibility.
