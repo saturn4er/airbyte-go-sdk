@@ -171,7 +171,7 @@ type StreamDescriptor struct {
 // streamDescriptor is an alias kept for internal JSON compatibility.
 type streamDescriptor = StreamDescriptor
 
-// StreamState represents state for a single stream
+// StreamState represents state for a single stream (output format for Airbyte coordinator).
 type StreamState struct {
 	StreamDescriptor StreamDescriptor       `json:"stream_descriptor"`
 	StreamState      map[string]interface{} `json:"stream_state,omitempty"`
@@ -179,6 +179,12 @@ type StreamState struct {
 
 // streamState is an alias kept for internal JSON compatibility.
 type streamState = StreamState
+
+// InputStreamState represents incoming state from Airbyte (camelCase format).
+type InputStreamState struct {
+	StreamDescriptor StreamDescriptor       `json:"streamDescriptor"`
+	StreamState      map[string]interface{} `json:"streamState,omitempty"`
+}
 
 // globalState represents state shared across multiple streams
 type globalState struct {
