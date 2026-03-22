@@ -14,6 +14,7 @@ const (
 	cmdCheck    cmd = "check"
 	cmdDiscover cmd = "discover"
 	cmdRead     cmd = "read"
+	cmdWrite    cmd = "write"
 )
 
 type msgType string
