@@ -180,10 +180,30 @@ type StreamState struct {
 // streamState is an alias kept for internal JSON compatibility.
 type streamState = StreamState
 
-// InputStreamState represents incoming state from Airbyte (camelCase format).
-type InputStreamState struct {
-	StreamDescriptor StreamDescriptor       `json:"streamDescriptor"`
-	StreamState      map[string]interface{} `json:"streamState,omitempty"`
+// InputState represents a single state entry from the Airbyte input state file.
+// The input file is a JSON array of these objects.
+type InputState = state
+
+// LoadStreamStates parses the Airbyte input state file and returns a map
+// keyed by "namespace:name" (or just "name" if no namespace) to stream state data.
+func LoadStreamStates(path string) (map[string]map[string]interface{}, error) {
+	var entries []InputState
+	if err := UnmarshalFromPath(path, &entries); err != nil {
+		return nil, err
+	}
+
+	result := make(map[string]map[string]interface{}, len(entries))
+	for _, entry := range entries {
+		if entry.Type != StateTypeStream || entry.Stream == nil {
+			continue
+		}
+		key := entry.Stream.StreamDescriptor.Name
+		if entry.Stream.StreamDescriptor.Namespace != nil {
+			key = *entry.Stream.StreamDescriptor.Namespace + ":" + key
+		}
+		result[key] = entry.Stream.StreamState
+	}
+	return result, nil
 }
 
 // globalState represents state shared across multiple streams
