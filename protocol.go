@@ -445,11 +445,17 @@ type PropertyType struct {
 	AirbyteType AirbytePropType `json:"airbyte_type,omitempty"`
 }
 type PropertySpec struct {
-	Description  string `json:"description"`
+	Title        string `json:"title,omitempty"`
+	Description  string `json:"description,omitempty"`
 	PropertyType `json:",omitempty"`
+	Const        interface{}                   `json:"const,omitempty"`
+	Default      interface{}                   `json:"default,omitempty"`
 	Examples     []string                      `json:"examples,omitempty"`
 	Items        map[string]interface{}        `json:"items,omitempty"`
 	Properties   map[PropertyName]PropertySpec `json:"properties,omitempty"`
+	Required     []PropertyName                `json:"required,omitempty"`
+	OneOf        []PropertySpec                `json:"oneOf,omitempty"`
+	Order        *int                          `json:"order,omitempty"`
 	IsSecret     bool                          `json:"airbyte_secret,omitempty"`
 }
 
